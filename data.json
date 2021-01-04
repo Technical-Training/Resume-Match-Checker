@@ -1,0 +1,38 @@
+[
+    {
+        "university" : "Chandigarh University",
+        "name" : "Amit Kumar",
+        "course" : "CSE",
+        "skills" : ["c++", "python", "java", "javascript", "DataStructures and Algorithms"]
+    },
+    {
+        "university" : "Bhandigarh University",
+        "name" : "Sumit Kumar",
+        "course" : "CSE",
+        "skills" : ["c++", "python", "java", "javascript", "DataStructures and Algorithms"]
+    },
+    {
+        "university" : "Chandigarh University",
+        "name" : "Prasanna Kumar",
+        "course" : "CSE",
+        "skills" : ["c++", "python", "java", "javascript", "DataStructures and Algorithms"]
+    },
+    {
+        "university" : "Ehandigarh University",
+        "name" : "Anna Kumar",
+        "course" : "ECE",
+        "skills" : ["c++", "python", "java", "javascript", "DataStructures and Algorithms"]
+    },
+    {
+        "university" : "Fhandigarh University",
+        "name" : "Jatin Kumar",
+        "course" : "BSE",
+        "skills" : ["c++", "python", "java", "javascript", "DataStructures and Algorithms"]
+    },
+    {
+        "university" : "Ghandigarh University",
+        "name" : "Jhon Kumar",
+        "course" : "PSP",
+        "skills" : ["c++", "python", "java", "javascript", "DataStructures and Algorithms"]
+    }
+]
