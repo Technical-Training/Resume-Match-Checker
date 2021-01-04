@@ -27,11 +27,16 @@ function compare(lst) {
                                 dif *= -1
                             } 
                             if (dif < 2) {
-                                match++;
+                                match += 2 - dif;
                             }
                             else if (obj1.lvl > 5) {
                                 if (dif < 100) {
-                                    match++
+                                    dif -= 50
+                                    if (dif < 0) {
+                                        dif = 0
+                                    }
+                                    dif /= 50
+                                    match += 2 - (dif + 1)
                                 }
                             }
                         }
