@@ -8,10 +8,16 @@ var obj = JSON.parse(data);
 
 console.log(obj);
 
-//funciton to calculate resume match percentage (trial)
+//function to calculate resume match percentage (trial)
 function calculate() {
     var count;
     var n = obj.length;
+    let st = obj[n - 1]
+    let len = obj[n - 1].skills.length
+    let skillLen = []
+    for (let i = 0; i < len; i++) {
+        skillLen.push(st.skills[i].length)
+    }
     for(var i = 0; i < n; i++) {
         count = 0;
         for(var j = i + 1; j < n; j++) {
