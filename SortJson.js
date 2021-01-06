@@ -22,11 +22,9 @@ for (let i = 0; i < len; i++) {
     for (let j = 0; j < len2; j++) {
         if (obj[i].skills[j].subdomains != undefined) {
             obj[i].skills[j].subdomains.sort(compare)
-            console.log(obj[i].skills[j].subdomains)
         }
     }
     obj[i].skills.sort(compare)
-    console.log(obj[i])
 }
 
 var json = JSON.stringify(obj)
@@ -35,3 +33,4 @@ fs.writeFile('data.json', json, 'utf8', function(err) {
         console.log('complete');
     }
 );
+
