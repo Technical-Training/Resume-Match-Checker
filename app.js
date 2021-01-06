@@ -18,7 +18,6 @@ async function main() {
     });
 
     lst = []
-    // console.log(obj.length)
     obj.forEach(tobj => {
         if (cmpObj.institution == tobj.institution) {
             return;
