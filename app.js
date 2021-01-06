@@ -14,10 +14,10 @@ async function main() {
     let cmpObj = obj[index]
     let total = 1
     obj[index].skills.forEach(element => {
-        total += (element.subdomains.length * 2) + 2
+        total += (element.subdomains.length * 3) + 3
     });
 
-    lst = []
+    let lst = []
     obj.forEach(tobj => {
         if (cmpObj.institution == tobj.institution) {
             return;
@@ -38,7 +38,10 @@ async function main() {
                 j++
             }
             else {
-                score += Math.max(0, 2 - Math.abs(cmpObj.skills[i].level - tobj.skills[j].level));
+                let diff = Math.abs(cmpObj.skills[i].level - tobj.skills[j].level);
+                if (diff < 2) {
+                    score += 1 + 2 - diff;
+                }
                 let k = 0
                 let l = 0
                 if (cmpObj.skills[i].subdomains == undefined || tobj.skills[j].subdomains == undefined) {
@@ -57,11 +60,15 @@ async function main() {
                             l++;
                         }
                         else {
+                            let dif;
                             if (cmpObj.skills[i].subdomains[k].level > 10) {
-                                score += Math.max(0, 2 - Math.floor(Math.abs(cmpObj.skills[i].subdomains[k].level - tobj.skills[j].subdomains[l].level) / 50));
+                                dif = Math.floor(Math.abs(cmpObj.skills[i].subdomains[k].level - tobj.skills[j].subdomains[l].level) / 50)
                             }
                             else {
-                                score += Math.max(0, 2 - Math.abs(cmpObj.skills[i].subdomains[k].level - tobj.skills[j].subdomains[l].level));
+                                dif = Math.abs(cmpObj.skills[i].subdomains[k].level - tobj.skills[j].subdomains[l].level)
+                            }
+                            if (dif < 2) {
+                                score += 1 + 2 - diff;
                             }
                             k++
                             l++
@@ -72,9 +79,14 @@ async function main() {
                 }
             }
         }
-        console.log(score)
+        let per = (score / total) * 100
+        if (per >= 60) {
+            let o = {}
+            o[tobj.name] = per
+            lst.push(o)
+        }
     })
-    console.log(total)
+    console.log(lst)
     rl.close()
 }
 
