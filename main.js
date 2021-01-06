@@ -1,116 +1,147 @@
+//read resume's json file
 const { DEFAULT_MIN_VERSION } = require('tls');
 const { rl, read } = require('./IO');
 
-function compare(lst) {
-    let match = 0
-    if (lst[0].InstitutionName == lst[1].InstitutionName) {
-        return 0;
+var fs = require('fs');
+
+var data = fs.readFileSync('data.json', 'utf8');
+var obj = JSON.parse(data);
+
+function compare(a, b) {
+    let comparison = 0
+    if (a.name < b.name) {
+        comparison = -1
     }
-    if (lst[1].courseName == lst[0].courseName) {
-        match++
+    else if (a.name > b.name) {
+        comparison = 1
     }
-    let l1 = lst[1].technology.length
-    let l2 = lst[0].technology.length
-    for (let i = 0; i < l1; i++) {
-        for (let j = 0; j < l2; j++) {
-            if (lst[1].technology[j] == lst[0].technology[i]) {
-                match++;
-                let m1 = lst[0].technology[i].subdomain.length
-                let m2 = lst[1].technology[i].subdomain.length
-                for (let k = 0; k < m1; k++) {
-                    for (let l = 0; l < m2; l++) {
-                        let obj1 = lst[0].technology[i].subdomain[k]
-                        let obj2 = lst[0].technology[i].subdomain[k]
-                        if (obj1.name == obj2.name) {
-                            let dif = obj1.lvl - obj2.lvl;
-                            if (dif < 0) {
-                                dif *= -1
-                            } 
+    return comparison
+}
+
+function calculate (student) {
+    let total = 1
+    student.skills.forEach(element => {
+        total += (element.subdomains.length * 3) + 3
+    });
+
+    let lst = []
+    obj.forEach(tobj => {
+        if (student.institution == tobj.institution) {
+            return;
+        }
+        let score = 0
+        if (student.course == tobj.course) {
+            score++;
+        }
+        let i = 0
+        let j = 0
+        let len1 = student.skills.length
+        let len2 = tobj.skills.length
+        while (i < len1 && j < len2) {
+            if (student.skills[i].name < tobj.skills[j].name) {
+                i++
+            }
+            else if (student.skills[i].name > tobj.skills[j].name) {
+                j++
+            }
+            else {
+                let diff = Math.abs(student.skills[i].level - tobj.skills[j].level);
+                if (diff < 2) {
+                    score += 1 + 2 - diff;
+                }
+                let k = 0
+                let l = 0
+                if (student.skills[i].subdomains == undefined || tobj.skills[j].subdomains == undefined) {
+                    i++
+                    j++
+                    continue;
+                }
+                else {
+                    let len3 = student.skills[i].subdomains.length
+                    let len4 = tobj.skills[j].subdomains.length
+                    while (k < len3 && l < len4) {
+                        if (student.skills[i].subdomains[k].name < tobj.skills[j].subdomains[l].name) {
+                            k++;
+                        }
+                        else if (student.skills[i].subdomains[k].name > tobj.skills[j].subdomains[l].name) {
+                            l++;
+                        }
+                        else {
+                            let dif;
+                            if (student.skills[i].subdomains[k].level > 10) {
+                                dif = Math.floor(Math.abs(student.skills[i].subdomains[k].level - tobj.skills[j].subdomains[l].level) / 50)
+                            }
+                            else {
+                                dif = Math.abs(student.skills[i].subdomains[k].level - tobj.skills[j].subdomains[l].level)
+                            }
                             if (dif < 2) {
-                                match += 2 - dif;
+                                score += 1 + 2 - diff;
                             }
-                            else if (obj1.lvl > 5) {
-                                if (dif < 100) {
-                                    dif -= 50
-                                    if (dif < 0) {
-                                        dif = 0
-                                    }
-                                    dif /= 50
-                                    match += 2 - (dif + 1)
-                                }
-                            }
+                            k++
+                            l++
                         }
                     }
+                    i++
+                    j++
                 }
             }
         }
-    }
-    let denom
-    if (lst[0].total > lst[1].total) {
-        denom = lst[0].total
-    }
-    else {
-        denom = lst[1].total
-    }
-    console.log(match)
-    let percent = (match / denom) * 100
-    return percent
+        let per = (score / total) * 100
+        if (per >= 60) {
+            let o = {}
+            o[tobj.name] = per
+            lst.push(o)
+        }
+    })
+    return lst
 }
 
 async function main() {
-    let lst = []
-    // No. of students to be compared
-    // Only two students are there in first draft
-    let studentCount = await read("Enter no. of students : ")
-
-    // Reading data of all the students
-    for (let i = 0; i < studentCount; i++) {
-        console.log("Enter user number", i + 1, "'s resume details: \n");
-        let total = 0
-        let student = {} // Empty student object
-        student.name = await read("\nEnter your name : ");
-        student.InstitutionName = await read("Enter your College Name (without special characters and in capital letters): ");
-        // Course Details
-        student.courseName = await read("Enter your Course Name : ");
-        total += 1
-        student.technology = []
-        console.log("Instruction before filling further details : ")
-        console.log("First enter name of the main technology/skill/domain in lowercase.\nNext insert it's subdomains (if any), like for web development it can be frameworks like React and angular, or languages you know like HTML, javasript and for Competitive Programming it can be platform names you code upon, data structure and algorithms, programming languages etc.")
-        console.log("Follwed by technology name also enter your level of expertise in it on a scale of 1 to 5. (In case of competitive programming platform put your number of stars or rating. Same has to be done with subdomains.")
+    console.log("Enter student's resume details: \n");
+    let student = {} // Empty student object
+    student.name = await read("\nEnter your name : ");
+    student.institution = await read("Enter your College Name (without special characters and in lowercase): ");
+    // Course Details
+    student.course = await read("Enter your Course Name : ");
+    student.skills = []
+    console.log("Instruction before filling further details : ")
+    console.log("First enter name of the main technology/skill/domain in lowercase.\nNext insert it's subdomains (if any), like for web development it can be frameworks like React and angular, or languages you know like HTML, javasript and for Competitive Programming it can be platform names you code upon, data structure and algorithms, programming languages etc.")
+    console.log("Follwed by technology name also enter your level of expertise in it on a scale of 1 to 5. (In case of competitive programming platform put your number of stars or rating. Same has to be done with subdomains.")
+    while (true) {
+        let tech = {}
+        tech.name = await read("\n\nEnter domain/skill name in lowercase to continue adding skills or \"Finish\" to finish the list (Enter choice without \"\"): ");
+        if (tech.name == "Finish") {
+            break;
+        }
+        tech.level = await read("Enter the level of expertise on a scale of 1 to 5 : ")
+        tech.subdomains = []
+        let check = await read("Are there any sub-domains or technologies, skills. Enter your answer in Yes/No : ")
+        if (check == "No") {
+            student.skills.push(tech)
+            continue
+        }
+        let cnt = 0
         while (true) {
-            let tech = {}
-            tech.skillName = await read("\n\nEnter domain/skill name in lowercase to continue adding skills or \"Finish\" to finish the list (Enter choice without \"\"): ");
-            if (tech.skillName == "Finish") {
+            let subDomain = {}
+            subDomain.name = await read("Enter subdomain/platform name in lowercase to continue adding subdomains or platforms or \"Finish\" to finish the list (Enter choice without \"\"): ");
+            if (subDomain.name == "Finish") {
                 break;
             }
-            total++
-            tech.level = await read("Enter the level of expertise on a scale of 1 to 5 : ")
-            tech.subdomain = []
-            let check = await read("Are there any sub-domains or technologies, skills. Enter your answer in Yes/No : ")
-            if (check == "No") {
-                student.technology.push(tech)
-                continue
-            }
-            let cnt = 0
-            while (true) {
-                let subDomain = {}
-                subDomain.name = await read("Enter subdomain/platform name in lowercase to continue adding subdomains or platforms or \"Finish\" to finish the list (Enter choice without \"\"): ");
-                if (subDomain.name == "Finish") {
-                    break;
-                }
-                total++
-                subDomain.lvl = await read("Enter the level of expertise on a scale of 1 to 5 or provide rating or stars(for competetive programming websites only) : ")
-                tech.subdomain.push(subDomain);
-            }
-            student.technology.push(tech)
+            subDomain.level = await read("Enter the level of expertise on a scale of 1 to 5 or provide rating or stars(for competetive programming websites only) : ")
+            tech.subdomains.push(subDomain);
         }
-        student.score = total
-        lst.push(student)
+        tech.subdomains.sort(compare);
+        student.skills.push(tech)
     }
+    student.skills.sort(compare)
     rl.close()
-    console.log(lst)
-    let match = compare(lst);
-    console.log(match)
+    let result = calculate(student)
+    obj.push(student)
+    var json = JSON.stringify(obj)
+    fs.writeFile('data.json', json, 'utf8', function(err) {
+            if (err) throw err;
+        }
+    );
 }
 
-main()
+main();
