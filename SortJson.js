@@ -28,7 +28,6 @@ for (let i = 0; i < len; i++) {
     obj[i].skills.sort(compare)
     console.log(obj[i])
 }
-obj.sort(compare)
 
 var json = JSON.stringify(obj)
 fs.writeFile('data.json', json, 'utf8', function(err) {
