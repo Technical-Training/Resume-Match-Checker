@@ -1,4 +1,6 @@
 //read resume's json file
+const { DEFAULT_MIN_VERSION } = require('tls');
+const { rl, read } = require('./IO');
 
 var fs = require('fs');
 
@@ -6,38 +8,75 @@ var data = fs.readFileSync('data.json', 'utf8');
 var obj = JSON.parse(data);
 
 
-console.log(obj);
+async function main() {
+    let index = await read("Enter index of student with whom the other resume are to be compared : ")
+    let len = obj.length
+    let cmpObj = obj[index]
+    let total = 1
+    obj[index].skills.forEach(element => {
+        total += (element.subdomains.length * 2) + 2
+    });
 
-//function to calculate resume match percentage (trial)
-function calculate() {
-    var count;
-    var n = obj.length;
-    let st = obj[n - 1]
-    let len = obj[n - 1].skills.length
-    let skillLen = []
-    for (let i = 0; i < len; i++) {
-        skillLen.push(st.skills[i].length)
-    }
-    for(var i = 0; i < n; i++) {
-        count = 0;
-        for(var j = i + 1; j < n; j++) {
-            if(obj[i].university == obj[j].university) {
-                console.log(i + 1, " and ", j + 1, " belongs to the same university.");
-                continue;
+    lst = []
+    // console.log(obj.length)
+    obj.forEach(tobj => {
+        if (cmpObj.institution == tobj.institution) {
+            return;
+        }
+        let score = 0
+        if (cmpObj.course == tobj.course) {
+            score++;
+        }
+        let i = 0
+        let j = 0
+        let len1 = cmpObj.skills.length
+        let len2 = tobj.skills.length
+        while (i < len1 && j < len2) {
+            if (cmpObj.skills[i].name < tobj.skills[j].name) {
+                i++
             }
-            if(obj[i].course == obj[j].course) count++;
-            for(var k = 0; k < obj[i].skills.length; k++) {
-                for(var l = 0; l < obj[j].skills.length; l++) {
-                    if(obj[i].skills[k] == obj[j].skills[l]) {
-                        count++;
-                        break;
+            else if (cmpObj.skills[i].name > tobj.skills[j].name) {
+                j++
+            }
+            else {
+                score += Math.max(0, 2 - Math.abs(cmpObj.skills[i].level - tobj.skills[j].level));
+                let k = 0
+                let l = 0
+                if (cmpObj.skills[i].subdomains == undefined || tobj.skills[j].subdomains == undefined) {
+                    i++
+                    j++
+                    continue;
+                }
+                else {
+                    let len3 = cmpObj.skills[i].subdomains.length
+                    let len4 = tobj.skills[j].subdomains.length
+                    while (k < len3 && l < len4) {
+                        if (cmpObj.skills[i].subdomains[k].name < tobj.skills[j].subdomains[l].name) {
+                            k++;
+                        }
+                        else if (cmpObj.skills[i].subdomains[k].name > tobj.skills[j].subdomains[l].name) {
+                            l++;
+                        }
+                        else {
+                            if (cmpObj.skills[i].subdomains[k].level > 10) {
+                                score += Math.max(0, 2 - Math.floor(Math.abs(cmpObj.skills[i].subdomains[k].level - tobj.skills[j].subdomains[l].level) / 50));
+                            }
+                            else {
+                                score += Math.max(0, 2 - Math.abs(cmpObj.skills[i].subdomains[k].level - tobj.skills[j].subdomains[l].level));
+                            }
+                            k++
+                            l++
+                        }
                     }
+                    i++
+                    j++
                 }
             }
-            console.log(i + 1, " and ", j + 1, " have ", count, " skills in common. ");
-
         }
-    }
+        console.log(score)
+    })
+    console.log(total)
+    rl.close()
 }
 
-calculate();
+main();

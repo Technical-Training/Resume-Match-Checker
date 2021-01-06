@@ -1,0 +1,365 @@
+[   
+    {
+        "institution" : "Chandigarh University",
+        "name" : "Prasanna Kumar",
+        "course" : "CSE",
+        "skills" : [
+            {
+                "name" : "competitive programming",
+                "level" : 3,
+                "subdomains" : [
+                    {
+                        "name" : "data structures and agorithms",
+                        "level" : 3
+                    },
+                    {
+                        "name" : "codechef",
+                        "level" : 2071
+                    },
+                    {
+                        "name" : "codeforces",
+                        "level" : 1760
+                    }
+                ]
+            }, 
+            {
+                "name" : "web development",
+                "level" : 2,
+                "subdomains" : [
+                    {
+                        "name" : "html",
+                        "level" : 2
+                    },
+                    {
+                        "name" : "css",
+                        "level" : 2
+                    },
+                    {
+                        "name" : "javascript",
+                        "level" : 1
+                    }
+                ]
+            },
+            {
+                "name" : "object oriented programming",
+                "level" : 3,
+                "subdomains" : [
+                    {
+                        "name" : "c++",
+                        "level" : 3
+                    },
+                    {
+                        "name" : "python",
+                        "level" : 2
+                    },
+                    {
+                        "name" : "java",
+                        "level" : 1
+                    }
+                ]
+            } 
+        ]
+    },
+
+    {
+        "institution" : "Chandigarh University",
+        "name" : "Amit Kumar",
+        "course" : "CSE",
+        "skills" : [
+            {
+                "name" : "competitive programming",
+                "level" : 3,
+                "subdomains" : [
+                    {
+                        "name" : "data structures and agorithms",
+                        "level" : 3
+                    },
+                    {
+                        "name" : "codechef",
+                        "level" : 2001
+                    },
+                    {
+                        "name" : "codeforces",
+                        "level" : 1570
+                    }
+                ]
+            }, 
+            {
+                "name" : "web development",
+                "level" : 3,
+                "subdomains" : [
+                    {
+                        "name" : "html",
+                        "level" : 3
+                    },
+                    {
+                        "name" : "css",
+                        "level" : 3
+                    },
+                    {
+                        "name" : "javascript",
+                        "level" : 2
+                    },
+                    {
+                        "name" : "nodejs",
+                        "level" : 2
+                    }
+                ]
+            },
+            {
+                "name" : "object oriented programming",
+                "level" : 3,
+                "subdomains" : [
+                    {
+                        "name" : "c++",
+                        "level" : 3
+                    },
+                    {
+                        "name" : "python",
+                        "level" : 3
+                    },
+                    {
+                        "name" : "java",
+                        "level" : 1
+                    }
+                ]
+            } 
+        ]
+    },
+
+    {
+        "institution" : "Punjab University",
+        "name" : "Anuj Goyal",
+        "course" : "ECE",
+        "skills" : [
+            {
+                "name" : "competitive programming",
+                "level" : 2,
+                "subdomains" : [
+                    {
+                        "name" : "data structures and agorithms",
+                        "level" : 2
+                    },
+                    {
+                        "name" : "codechef",
+                        "level" : 1649
+                    },
+                    {
+                        "name" : "codeforces",
+                        "level" : 1350
+                    }
+                ]
+            }, 
+            {
+                "name" : "web development",
+                "level" : 4,
+                "subdomains" : [
+                    {
+                        "name" : "html",
+                        "level" : 4
+                    },
+                    {
+                        "name" : "css",
+                        "level" : 4
+                    },
+                    {
+                        "name" : "javascript",
+                        "level" : 4
+                    }, 
+                    {
+                        "name" : "nodejs",
+                        "level" : 3
+                    }
+                ]
+            },
+            {
+                "name" : "Machine Learning",
+                "level" : 3,
+                "subdomains" : [
+                    {
+                        "name" : "python",
+                        "level" : 3
+                    },
+                    {
+                        "name" : "r",
+                        "level" : 2
+                    },
+                    {
+                        "name" : "nlp",
+                        "level" : 2
+                    }
+                ]
+            } 
+        ]
+    },
+    
+    {
+        "institution" : "IIT Rurkee",
+        "name" : "Rishab Verma",
+        "course" : "ECE",
+        "skills" : [
+            {
+                "name" : "competitive programming",
+                "level" : 4,
+                "subdomains" : [
+                    {
+                        "name" : "data structures and agorithms",
+                        "level" : 4
+                    },
+                    {
+                        "name" : "codechef",
+                        "level" : 2260
+                    },
+                    {
+                        "name" : "codeforces",
+                        "level" : 2151
+                    },
+                    {
+                        "name" : "hackerearth",
+                        "level" : 2021
+                    }
+                ]
+            }, 
+            {
+                "name" : "web development",
+                "level" : 4,
+                "subdomains" : [
+                    {
+                        "name" : "html",
+                        "level" : 4
+                    },
+                    {
+                        "name" : "css",
+                        "level" : 4
+                    },
+                    {
+                        "name" : "javascript",
+                        "level" : 4
+                    },
+                    {
+                        "name" : "reactjs",
+                        "level" : 4
+                    },
+                    {
+                        "name" : "vuejs",
+                        "level" : 4
+                    },
+                    {
+                        "name" : "nodejs",
+                        "level" : 4
+                    },
+                    {
+                        "name" : "mern stack",
+                        "level" : 4
+                    }
+                ]
+            },
+            {
+                "name" : "object oriented programming",
+                "level" : 3,
+                "subdomains" : [
+                    {
+                        "name" : "c++",
+                        "level" : 2
+                    },
+                    {
+                        "name" : "python",
+                        "level" : 4
+                    },
+                    {
+                        "name" : "java",
+                        "level" : 2
+                    },
+                    {
+                        "name" : "c#",
+                        "level" : 3
+                    } 
+                ]
+            },
+            {
+                "name" : "machine learning",
+                "level" : 3,
+                "subdomains" : [
+                    {
+                        "name" : "python",
+                        "level" : 3
+                    },
+                    {
+                        "name" : "r",
+                        "level" : 3
+                    },
+                    {
+                        "name" : "deep learning",
+                        "level" : 3
+                    }
+                ]
+            }
+        ]
+    },
+
+    {
+        "institution" : "DTU",
+        "name" : "Jatin Khandual",
+        "course" : "CSE",
+        "skills" : [
+            {
+                "name" : "competitive programming",
+                "level" : 4,
+                "subdomains" : [
+                    {
+                        "name" : "data structures and agorithms",
+                        "level" : 4
+                    },
+                    {
+                        "name" : "codechef",
+                        "level" : 2241
+                    },
+                    {
+                        "name" : "codeforces",
+                        "level" : 1700
+                    }
+                ]
+            }, 
+            {
+                "name" : "web development",
+                "level" : 2,
+                "subdomains" : [
+                    {
+                        "name" : "html",
+                        "level" : 2
+                    },
+                    {
+                        "name" : "css",
+                        "level" : 2
+                    },
+                    {
+                        "name" : "javascript",
+                        "level" : 2
+                    }
+                ]
+            },
+            {
+                "name" : "object oriented programming",
+                "level" : 3,
+                "subdomains" : [
+                    {
+                        "name" : "c++",
+                        "level" : 3
+                    },
+                    {
+                        "name" : "python",
+                        "level" : 2
+                    },
+                    {
+                        "name" : "java",
+                        "level" : 2
+                    }
+                ]
+            },
+            {
+                "name" : "mathematics",
+                "level" : 4
+            } 
+        ]
+    }
+]
