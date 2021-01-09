@@ -136,6 +136,7 @@ async function main() {
     student.skills.sort(compare)
     rl.close()
     let result = calculate(student)
+    console.log(result)
     obj.push(student)
     var json = JSON.stringify(obj)
     fs.writeFile('data.json', json, 'utf8', function(err) {
